@@ -1,5 +1,6 @@
 package br.com.alurafood.paymentservice.model;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -7,6 +8,8 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -40,21 +43,6 @@ public class Payment {
     @Column(name = "name")
     private String name;
 
-    @NotBlank
-    @Size(max = 19)
-    @Column(name = "number")
-    private String number;
-
-    @NotBlank
-    @Size(max = 7)
-    @Column(name = "expiration")
-    private String expiration;
-
-    @NotBlank
-    @Size(min = 3, max = 3)
-    @Column(name = "code")
-    private String code;
-
     @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
@@ -65,6 +53,11 @@ public class Payment {
     private String orderId;
 
     @NotNull
-    @Column(name = "payment_method_id")
-    private String paymentMethodId;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "payment_method_id", referencedColumnName = "id")
+    private PaymentMethod paymentMethod;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "card_id", referencedColumnName = "id")
+    private Card card;
 }

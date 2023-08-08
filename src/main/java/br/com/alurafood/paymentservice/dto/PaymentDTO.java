@@ -30,16 +30,12 @@ public class PaymentDTO implements Serializable {
 
     private String name;
 
-    private String number;
-
-    private String expiration;
-
-    private String code;
-
     private Status status;
 
     private String orderId;
 
     private String paymentMethodId;
+
+    private String cardId;
 
 }
