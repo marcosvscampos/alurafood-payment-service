@@ -1,1 +1,14 @@
+spring:
+  jpa:
+    show-sql: true
+  datasource:
+    driver-class: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/alurafood-payment-service?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: secret;123!
+
+server:
+  port: 12080
+  servlet:
+    context-path: /alura-food/api
 
