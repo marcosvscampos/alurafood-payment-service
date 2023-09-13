@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: payment-service
   jpa:
     show-sql: true
   datasource:
@@ -8,7 +10,21 @@ spring:
     password: secret;123!
 
 server:
-  port: 12080
+  port: 0
   servlet:
     context-path: /alura-food/api
 
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${random.int}
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8081/eureka
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      confirmPayment:
+        slidingWindowSize: 3
+        minimumNumberOfCalls: 2
+        waitDurationInOpenState: 50s
